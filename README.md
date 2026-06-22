@@ -3,56 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كايدن - الموقع الأول للروايات والمانغا والمانهاوا</title>
-    <meta name="description" content="كايدن - وجهتك الأولى للروايات العربية، المانغا اليابانية، المانهاوا الكورية، والمانهوا الصينية. آلاف الأعمال المترجمة والمكتملة بجودة عالية.">
+    <title>كايدن - أكبر مكتبة للقصص المصورة المترجمة | 1000+ عمل</title>
     <style>
         :root {
-            --bg-dark: #1A0A2E;
-            --bg-card: #1E1035;
-            --bg-card-hover: #251540;
-            --primary: #7B2FBE;
-            --primary-light: #A855F7;
-            --neon: #C084FC;
-            --gold: #F59E0B;
-            --text: #F5F0FF;
-            --text-muted: #B8A9D4;
+            --bg: #0D0618;
+            --card: #150A24;
+            --primary: #7C3AED;
+            --light: #A78BFA;
+            --neon: #C4B5FD;
+            --gold: #FBBF24;
+            --text: #EDE9FE;
+            --muted: #8B7AA8;
             --border: #2D1B4E;
-            --glass-bg: rgba(26, 10, 46, 0.85);
-            --gradient-1: linear-gradient(135deg, #7B2FBE, #A855F7);
-            --gradient-2: linear-gradient(135deg, #1A0A2E, #2D1B4E);
-            --shadow-neon: 0 0 20px rgba(168, 85, 247, 0.3);
-            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: all 0.3s ease;
-            --ad-bg: rgba(255, 255, 255, 0.03);
-            --ad-border: rgba(168, 85, 247, 0.2);
+            --radius: 14px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        
+        .header{position:fixed;top:0;left:0;width:100%;z-index:999;background:rgba(13,6,24,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 0}
+        .header-inner{max-width:1300px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+        .logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-size:1.6rem;font-weight:900}
+        .logo-icon{font-size:1.8rem}
+        .logo span{background:linear-gradient(135deg,#7C3AED,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .search-box{display:flex;align-items:center;gap:6px}
+        .search-box input{padding:10px 16px;border-radius:50px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:0.9rem;width:220px;outline:none;font-family:inherit}
+        .search-box input:focus{border-color:var(--primary)}
+        .btn{padding:10px 20px;border-radius:50px;border:none;cursor:pointer;font-weight:700;font-size:0.85rem;transition:all 0.3s;font-family:inherit}
+        .btn-primary{background:linear-gradient(135deg,#7C3AED,#A78BFA);color:white}
+        .btn-outline{border:2px solid var(--light);background:transparent;color:var(--neon)}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 0 20px rgba(124,58,237,0.3)}
+        .nav-links{display:flex;gap:2px;flex-wrap:wrap;padding:4px 20px;max-width:1300px;margin:0 auto}
+        .nav-links a{color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:50px;font-size:0.82rem;font-weight:500}
+        .nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(124,58,237,0.15)}
+
+        .main-content{margin-top:130px;max-width:1300px;margin-left:auto;margin-right:auto;padding:0 20px 60px}
+        .hero{background:linear-gradient(135deg,#150A24,#2D1B4E);border-radius:var(--radius);padding:40px;text-align:center;margin-bottom:30px;border:1px solid var(--border)}
+        .hero h1{font-size:2rem;margin-bottom:8px;background:linear-gradient(135deg,#C4B5FD,#FBBF24);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero p{color:var(--muted);margin-bottom:16px;font-size:1rem}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:30px}
+        .stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all 0.3s}
+        .stat-card:hover{border-color:var(--primary);transform:translateY(-3px)}
+        .stat-icon{font-size:2rem;margin-bottom:6px}
+        .stat-num{font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#A78BFA,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .stat-label{color:var(--muted);font-size:0.82rem}
+
+        .section{margin-bottom:40px}
+        .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+        .section-title{font-size:1.3rem;font-weight:700;display:flex;align-items:center;gap:8px}
+        .filters{display:flex;gap:8px;flex-wrap:wrap}
+        .filter-btn{padding:7px 14px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:0.78rem;transition:all 0.3s;font-family:inherit}
+        .filter-btn:hover,.filter-btn.active{border-color:var(--primary);color:var(--text);background:rgba(124,58,237,0.1)}
+
+        .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+        .book-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all 0.3s}
+        .book-card:hover{border-color:var(--primary);transform:translateY(-5px);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+        .book-cover{width:100%;aspect-ratio:3/4;overflow:hidden;background:#1E1035;position:relative}
+        .book-cover img{width:100%;height:100%;object-fit:cover;transition:all 0.4s}
+        .book-card:hover .book-cover img{transform:scale(1.07)}
+        .book-badge{position:absolute;top:6px;right:6px;padding:3px 8px;border-radius:50px;font-size:0.6rem;font-weight:700;z-index:2}
+        .badge-complete{background:#10B981;color:#fff}
+        .badge-ongoing{background:#EF4444;color:#fff}
+        .badge-popular{background:#8B5CF6;color:#fff}
+        .book-info{padding:10px}
+        .book-title{font-weight:700;font-size:0.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .book-meta{font-size:0.68rem;color:var(--muted);margin-top:3px;display:flex;gap:6px;align-items:center}
+        .book-rating{color:var(--gold)}
+
+        .trending-list{display:flex;flex-direction:column;gap:10px}
+        .trending-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;cursor:pointer;transition:all 0.3s}
+        .trending-item:hover{border-color:var(--primary)}
+        .trending-rank{font-size:1.5rem;font-weight:900;min-width:38px;text-align:center}
+        .rank-1{color:#FFD700}.rank-2{color:#C0C0C0}.rank-3{color:#CD7F32}
+        .trending-cover{width:45px;height:62px;border-radius:6px;overflow:hidden;flex-shrink:0}
+        .trending-cover img{width:100%;height:100%;object-fit:cover}
+        .trending-info{flex:1}
+        .trending-title{font-weight:700;font-size:0.9rem}
+        .trending-meta{font-size:0.7rem;color:var(--muted)}
+
+        .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s}
+        .modal-overlay.active{opacity:1;visibility:visible}
+        .modal{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;position:relative}
+        .modal-close{position:absolute;top:10px;left:12px;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+        .modal-cover{width:120px;height:170px;border-radius:10px;margin:0 auto 14px;overflow:hidden}
+        .modal-cover img{width:100%;height:100%;object-fit:cover}
+        .modal h2{text-align:center;margin-bottom:6px;font-size:1.2rem}
+        .modal-meta{display:flex;justify-content:center;gap:10px;margin:12px 0;flex-wrap:wrap}
+        .modal-meta span{background:rgba(124,58,237,0.15);padding:5px 12px;border-radius:50px;font-size:0.78rem}
+        .modal-desc{color:var(--muted);font-size:0.85rem;line-height:1.7;margin-bottom:14px}
+        .modal-btn{display:block;width:100%;background:linear-gradient(135deg,#7C3AED,#A78BFA);color:white;border:none;padding:12px;border-radius:50px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit}
+
+        .footer{background:var(--card);border-top:1px solid var(--border);padding:30px 20px;text-align:center}
+        .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+        .footer-links a{color:var(--muted);text-decoration:none;font-size:0.82rem}
+        .footer-text{color:var(--muted);font-size:0.78rem}
+
+        .scroll-top{position:fixed;bottom:24px;left:24px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#A78BFA);color:white;border:none;cursor:pointer;font-size:1.2rem;z-index:998;opacity:0;visibility:hidden;transition:all 0.3s}
+        .scroll-top.visible{opacity:1;visibility:visible}
+
+        @media(max-width:768px){
+            .hero h1{font-size:1.4rem}
+            .stats-grid{grid-template-columns:repeat(2,1fr)}
+            .books-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+            .main-content{margin-top:150px}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo"><span class="logo-icon">⚡</span><span>كايدن</span></a>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 بحث عن أي عمل..." oninput="searchWorks()">
+                <button class="btn btn-outline" onclick="showWriterPage()">✍️ انضم</button>
+                <button class="btn btn-primary">👤 دخول</button>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="active" onclick="filterAll()">الكل</a>
+            <a href="#" onclick="filterType('manhwa')">🌏 مانهاوا</a>
+            <a href="#" onclick="filterType('manhua')">🀄 مانهوا</a>
+            <a href="#" onclick="filterType('manga')">🎭 مانغا</a>
+            <a href="#" onclick="filterType('novel')">📚 روايات</a>
+            <a href="#" onclick="filterType('chinese')">🇨🇳 صيني</a>
+            <a href="#" onclick="filterType('korean')">🇰🇷 كوري</a>
+            <a href="#" onclick="filterType('japanese')">🇯🇵 ياباني</a>
+        </nav>
+    </header>
+
+    <main class="main-content" id="mainPage">
+        <div class="hero">
+            <h1>⚡ كايدن - أكبر مكتبة للقصص المصورة المترجمة</h1>
+            <p>أكثر من <strong>1000 عمل</strong> مترجم للعربية: مانهاوا كورية، مانهوا صينية، مانغا يابانية، وروايات ويب</p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+                <span style="background:rgba(124,58,237,0.2);color:var(--neon);padding:6px 14px;border-radius:50px;font-size:0.8rem">🌏 +400 مانهاوا</span>
+                <span style="background:rgba(124,58,237,0.2);color:var(--neon);padding:6px 14px;border-radius:50px;font-size:0.8rem">🀄 +300 مانهوا</span>
+                <span style="background:rgba(124,58,237,0.2);color:var(--neon);padding:6px 14px;border-radius:50px;font-size:0.8rem">🎭 +200 مانغا</span>
+                <span style="background:rgba(124,58,237,0.2);color:var(--neon);padding:6px 14px;border-radius:50px;font-size:0.8rem">📚 +150 رواية</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-num" id="totalCount">0</div><div class="stat-label">إجمالي الأعمال</div></div>
+            <div class="stat-card"><div class="stat-icon">🌏</div><div class="stat-num" id="manhwaCount">0</div><div class="stat-label">مانهاوا</div></div>
+            <div class="stat-card"><div class="stat-icon">🀄</div><div class="stat-num" id="manhuaCount">0</div><div class="stat-label">مانهوا</div></div>
+            <div class="stat-card"><div class="stat-icon">🎭</div><div class="stat-num" id="mangaCount">0</div><div class="stat-label">مانغا</div></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">🔥 جميع الأعمال</h2>
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterAll()">الكل</button>
+                    <button class="filter-btn" onclick="filterStatus('complete')">✅ مكتملة</button>
+                    <button class="filter-btn" onclick="filterStatus('ongoing')">🔄 مستمرة</button>
+                    <button class="filter-btn" onclick="sortWorks('rating')">⭐ الأعلى تقييماً</button>
+                    <button class="filter-btn" onclick="sortWorks('newest')">🆕 الأحدث</button>
+                </div>
+            </div>
+            <div class="books-grid" id="worksGrid"></div>
+            <div style="text-align:center;margin-top:20px">
+                <button class="btn btn-outline" onclick="loadMore()">تحميل المزيد ↓</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header"><h2 class="section-title">📈 الأكثر رواجاً</h2></div>
+            <div class="trending-list" id="trendingGrid"></div>
+        </div>
+    </main>
+
+    <!-- صفحة الكاتب -->
+    <main class="main-content" id="writerPage" style="display:none">
+        <button class="btn btn-outline" onclick="showMainPage()" style="margin-bottom:20px">← العودة</button>
+        <div class="hero"><h2>✍️ انضم إلى أسرة كايدن</h2><p>أضف أعمالك المترجمة وشاركها مع آلاف القراء</p></div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:650px;margin:0 auto">
+            <div style="margin-bottom:12px"><label style="display:block;margin-bottom:4px;font-weight:600">اسمك</label><input type="text" id="wName" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;outline:none" placeholder="اسمك أو فريقك"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+                <div><label style="display:block;margin-bottom:4px;font-weight:600">نوع العمل</label><select id="wType" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit"><option>🌏 مانهاوا</option><option>🀄 مانهوا</option><option>🎭 مانغا</option><option>📚 رواية</option></select></div>
+                <div><label style="display:block;margin-bottom:4px;font-weight:600">التصنيف</label><select id="wGenre" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit"><option>أكشن</option><option>رومانسي</option><option>إيسيكاي</option><option>فانتازيا</option><option>رعب</option><option>كوميدي</option></select></div>
+            </div>
+            <div style="margin-bottom:12px"><label style="display:block;margin-bottom:4px;font-weight:600">اسم العمل</label><input type="text" id="wTitle" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;outline:none" placeholder="اسم الرواية أو المانغا"></div>
+            <div style="margin-bottom:12px"><label style="display:block;margin-bottom:4px;font-weight:600">رابط الصورة</label><input type="text" id="wImage" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;outline:none" placeholder="رابط صورة الغلاف"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+                <div><label style="display:block;margin-bottom:4px;font-weight:600">عدد الفصول</label><input type="text" id="wChapters" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;outline:none" placeholder="مثلاً: 150"></div>
+                <div><label style="display:block;margin-bottom:4px;font-weight:600">الحالة</label><select id="wStatus" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit"><option value="ongoing">مستمر</option><option value="complete">مكتمل</option></select></div>
+            </div>
+            <div style="margin-bottom:12px"><label style="display:block;margin-bottom:4px;font-weight:600">الوصف</label><textarea id="wDesc" style="width:100%;padding:10px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;outline:none;min-height:80px;resize:vertical" placeholder="وصف القصة..."></textarea></div>
+            <button class="btn btn-primary" style="width:100%" onclick="addWork()">🚀 أضف العمل الآن</button>
+            <div id="successMsg" style="display:none;text-align:center;padding:12px;background:rgba(16,185,129,0.1);border:1px solid #10B981;border-radius:8px;color:#10B981;margin-top:12px">✅ تمت الإضافة بنجاح!</div>
+        </div>
+        <div style="margin-top:24px"><h3 style="color:var(--neon);margin-bottom:10px">📋 أعمالك المضافة</h3><div class="books-grid" id="userWorksGrid"></div></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links"><a href="#">عن كايدن</a><a href="#">اتصل بنا</a><a href="#">سياسة الخصوصية</a><a href="#" onclick="showWriterPage()">انضم ككاتب</a></div>
+        <p class="footer-text">© 2025 كايدن - Kaiden. جميع الحقوق محفوظة</p>
+    </footer>
+
+    <div class="modal-overlay" id="modal"><div class="modal" id="modalContent"></div></div>
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <script>
+        // ========== توليد 1000+ عمل تلقائياً ==========
+        const titles = {
+            manhwa: ['Solo Leveling','The Beginning After The End','Tower of God','Noblesse','Sweet Home','Omniscient Reader\'s Viewpoint','The World After the Fall','Eleceed','Wind Breaker','Mercenary Enrollment','Lookism','Viral Hit','Manager Kim','Quest Supremacy','Reality Quest','Nano Machine','Doom Breaker','SSS-Class Revival Hunter','The Greatest Estate Developer','Damn Reincarnation','Northern Blade','Chronicles of Heavenly Demon','Volcanic Age','Murim Login','Worn and Torn Newbie','The Returner\'s Magic','Second Life Ranker','Talent-Swallowing Magician','Survival Story of a Sword King','Knight King Who Returned','Player That Can\'t Level Up','Return of Mount Hua Sect','Legend of Northern Blade','Skeleton Soldier','Kill the Hero','Overgeared','Ranker Who Lives Twice','Wizard of Arsenia','Dark Magician Transmigrates','Duke Pendragon','Trash of Count\'s Family','Solo Max-Level Newbie','I\'m Not That Kind of Talent','Book Eating Magician','FFF-Class Trash Hero','Warrior Returns','Hero Has Returned','Survival of a Sword King','I Grow Stronger by Eating'],
+            manhua: ['Battle Through the Heavens','Apotheosis','Yuan Zun','Star Martial God','Dragon Prince Yuan','Spirit Blade Mountain','Soul Land','Soul Land 2','Soul Land 3','The Great Ruler','Versatile Mage','Tales of Demons and Gods','God of Martial Arts','Peerless Battle Spirit','Rebirth of Urban Immortal','Spare Me Great Lord','Martial Peak','The Invincible','Magic Emperor','Demonic Emperor','I\'m an Evil God','Release That Witch','Douluo Dalu','Battle Frenzy','Master of Gu','Reverend Insanity','I Shall Be Sealed','A Will Eternal','Renegade Immortal','Swallowed Star','Lord Xue Ying','Seeking the Flying Sword Path','Desolate Era','Coiling Dragon','Stellar Transformations','I Eat Tomatoes Collection','Ancient Godly Monarch','Against the Gods','Martial God Asura','Emperor\'s Domination'],
+            manga: ['One Piece','Naruto','Bleach','Attack on Titan','Demon Slayer','Jujutsu Kaisen','My Hero Academia','Black Clover','Dragon Ball Super','Hunter x Hunter','One Punch Man','Tokyo Revengers','Chainsaw Man','Spy x Family','Frieren','Berserk','Vagabond','Vinland Saga','Kingdom','Haikyuu!!','Blue Lock','Death Note','Fullmetal Alchemist','Monster','20th Century Boys','Goodnight Punpun','Oyasumi Punpun','Slam Dunk','Rurouni Kenshin','Gintama','Fairy Tail','Edens Zero','Rave Master','Toriko','Assassination Classroom','Mob Psycho 100','Made in Abyss','Promised Neverland','Dr. Stone','Kaguya-sama','Komi Can\'t Communicate'],
+            novel: ['I Shall Seal the Heavens','A Will Eternal','Renegade Immortal','Coiling Dragon','Stellar Transformations','Desolate Era','Swallowed Star','Martial World','Against the Gods','Tales of Demons and Gods','The Great Ruler','Battle Through the Heavens (Novel)','Warlock of Magus World','Reverend Insanity','Lord of Mysteries','Shadow Slave','Mother of Learning','Mushoku Tensei','Re:Zero','Overlord','Tensura','Classroom of the Elite','DanMachi','Shield Hero','Sword Art Online','Eminence in Shadow','Second Coming of Gluttony','Omniscient Reader (Novel)','Trash of Count\'s Family (Novel)','SSS-Class Revival Hunter (Novel)']
+        };
+
+        const authors = ['Chugong','TurtleMe','SIU','Son Jeho','Kim Carnby','Sing Shong','Yongje Park','Jo Yong-seok','Taejun Pak','Youn In-wan','Heavenly Silkworm Potato','Mad Snail','Tang Jia San Shao','I Eat Tomatoes','Er Gen','Cocooned Cow','Eiichiro Oda','Masashi Kishimoto','Tite Kubo','Hajime Isayama','Gege Akutami','ONE','Tatsuki Fujimoto','Rifujin na Magonote','Tappei Nagatsuki','Kugane Maruyama','Fuse','Reki Kawahara'];
+
+        const genres = ['أكشن','رومانسي','إيسيكاي','فانتازيا','رعب','كوميدي','قتالي','مدرسي','سحر','خارق للطبيعة','دراما','غموض','نفسي','زراعة','فنون قتالية','مغامرة'];
+
+        const images = [
+            'https://cdn.myanimelist.net/images/manga/3/218973l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/246489l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/164565l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/230962l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/179432l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/247901l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/273456l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/278912l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/249876l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/188888l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/188990l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/253146l.jpg',
+            'https://cdn.myanimelist.net/images/manga/3/249658l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/37846l.jpg',
+            'https://cdn.myanimelist.net/images/manga/3/202577l.jpg',
+            'https://cdn.myanimelist.net/images/manga/3/219741l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/121153l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/184521l.jpg',
+            'https://cdn.myanimelist.net/images/manga/2/156355l.jpg',
+            'https://cdn.myanimelist.net/images/manga/1/181655l.jpg'
+        ];
+
+        function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+        // توليد 1000+ عمل
+        let allWorks = [];
+        let workId = 0;
+        const types = ['manhwa','manhua','manga','novel'];
+        const typeConfig = { manhwa: { count: 400, origin: 'korean', flag: '🌏', label: 'مانهاوا' }, manhua: { count: 300, origin: 'chinese', flag: '🀄', label: 'مانهوا' }, manga: { count: 200, origin: 'japanese', flag: '🎭', label: 'مانغا' }, novel: { count: 150, origin: 'chinese', flag: '📚', label: 'رواية' } };
+
+        function generateWork(type) {
+            const config = typeConfig[type];
+            const titleList = titles[type];
+            const title = titleList[workId % titleList.length] + (workId >= titleList.length ? ' ' + (Math.floor(workId / titleList.length) + 2) : '');
+            workId++;
+            return {
+                id: 'w_' + workId,
+                title: title,
+                author: rand(authors),
+                type: type,
+                origin: config.origin,
+                flag: config.flag,
+                label: config.label,
+                image: rand(images),
+                chapters: randInt(50, 800),
+                status: Math.random() > 0.4 ? 'ongoing' : 'complete',
+                rating: (Math.random() * 2 + 3).toFixed(1),
+                genre: rand(genres),
+                desc: 'قصة شيقة مترجمة للعربية بالكامل. ' + title + ' من أشهر الأعمال في مجال ' + config.label + '. تحديثات مستمرة وجودة عالية.'
+            };
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        for (const type of types) {
+            for (let i = 0; i < typeConfig[type].count; i++) {
+                allWorks.push(generateWork(type));
+            }
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
+        // عرض 20 عمل في البداية
+        let displayCount = 20;
+        let currentFilter = 'all';
+        let currentStatus = 'all';
+        let currentSort = 'default';
+        let filteredWorks = [...allWorks];
+
+        function getFilteredWorks() {
+            let works = [...allWorks];
+            if (currentFilter !== 'all') {
+                if (['chinese','korean','japanese'].includes(currentFilter)) {
+                    works = works.filter(w => w.origin === currentFilter);
+                } else {
+                    works = works.filter(w => w.type === currentFilter);
+                }
+            }
+            if (currentStatus !== 'all') {
+                works = works.filter(w => w.status === currentStatus);
+            }
+            if (currentSort === 'rating') {
+                works.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+            } else if (currentSort === 'newest') {
+                works.reverse();
+            }
+            return works;
         }
 
-        /* ===== شريط التحميل ===== */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-dark);
-            display: flex;
-            align-items: center;
+        function renderWorks() {
+            filteredWorks = getFilteredWorks();
+            const container = document.getElementById('worksGrid');
+            const toShow = filteredWorks.slice(0, displayCount);
+            container.innerHTML = toShow.map(w => `
+                <div class="book-card" onclick="openModal('${w.id}')">
+                    <div class="book-cover">
+                        <img src="${w.image}" alt="${w.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#4C1D95,#7C3AED)';">
+                        <span class="book-badge ${w.status==='complete'?'badge-complete':'badge-ongoing'}">${w.status==='complete'?'مكتملة':'مستمرة'}</span>
+                    </div>
+                    <div class="book-info">
+                        <div class="book-title">${w.flag} ${w.title}</div>
+                        <div class="book-meta"><span class="book-rating">⭐${w.rating}</span> · ${w.chapters} فصل</div>
+                        <div class="book-meta">${w.genre} · ${w.label}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('totalCount').textContent = allWorks.length;
+            document.getElementById('manhwaCount').textContent = allWorks.filter(w=>w.type==='manhwa').length;
+            document.getElementById('manhuaCount').textContent = allWorks.filter(w=>w.type==='manhua').length;
+            document.getElementById('mangaCount').textContent = allWorks.filter(w=>w.type==='manga').length;
+        }
+
+        function loadMore() {
+            displayCount += 20;
+            if (displayCount > filteredWorks.length) displayCount = filteredWorks.length;
+            renderWorks();
+        }
+
+        function searchWorks() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (query === '') {
+                filteredWorks = getFilteredWorks();
+                displayCount = 20;
+                renderWorks();
+                return;
+            }
+            filteredWorks = allWorks.filter(w => w.title.toLowerCase().includes(query) || w.author.toLowerCase().includes(query) || w.genre.includes(query));
+            displayCount = 20;
+            const container = document.getElementById('worksGrid');
+            container.innerHTML = filteredWorks.slice(0, displayCount).map(w => `
+                <div class="book-card" onclick="openModal('${w.id}')">
+                    <div class="book-cover">
+                        <img src="${w.image}" alt="${w.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#4C1D95,#7C3AED)';">
+                        <span class="book-badge ${w.status==='complete'?'badge-complete':'badge-ongoing'}">${w.status==='complete'?'مكتملة':'مستمرة'}</span>
+                    </div>
+                    <div class="book-info">
+                        <div class="book-title">${w.flag} ${w.title}</div>
+                        <div class="book-meta"><span class="book-rating">⭐${w.rating}</span> · ${w.chapters} فصل</div>
+                        <div class="book-meta">${w.genre} · ${w.label}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterType(type) {
+            currentFilter = type;
+            currentStatus = 'all';
+            currentSort = 'default';
+            displayCount = 20;
+            filteredWorks = getFilteredWorks();
+            renderWorks();
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        }
+        function filterAll() {
+            currentFilter = 'all';
+            currentStatus = 'all';
+            currentSort = 'default';
+            displayCount = 20;
+            filteredWorks = allWorks;
+            renderWorks();
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.querySelector('.nav-links a[href="#"]').classList.add('active');
+        }
+        function filterStatus(status) {
+            currentStatus = status;
+            displayCount = 20;
+            filteredWorks = getFilteredWorks();
+            renderWorks();
+        }
+        function sortWorks(sort) {
+            currentSort = sort;
+            displayCount = 20;
+            filteredWorks = getFilteredWorks();
+            renderWorks();
+        }
+
+        function renderTrending() {
+            const trending = allWorks.filter(w => parseFloat(w.rating) >= 4.5).sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating)).slice(0, 5);
+            const container = document.getElementById('trendingGrid');
+            const ranks = ['rank-1','rank-2','rank-3','',''];
+            container.innerHTML = trending.map((w,i) => `
+                <div class="trending-item" onclick="openModal('${w.id}')">
+                    <span class="trending-rank ${ranks[i]}">#${i+1}</span>
+                    <div class="trending-cover"><img src="${w.image}" alt="${w.title}" loading="lazy"></div>
+                    <div class="trending-info">
+                        <div class="trending-title">${w.flag} ${w.title}</div>
+                        <div class="trending-meta">⭐${w.rating} · ${w.chapters} فصل · ${w.genre} · ${w.label}</div>
+                    </div>
+                    <button class="btn btn-primary" style="padding:7px 14px;font-size:0.72rem">اقرأ 💜</button>
+                </div>
+            `).join('');
+        }
+
+        function openModal(id) {
+            const w = allWorks.find(x => x.id === id);
+            if (!w) return;
+            const overlay = document.getElementById('modal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div class="modal-cover"><img src="${w.image}" alt="${w.title}" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#4C1D95,#7C3AED)';"></div>
+                <span class="book-badge ${w.status==='complete'?'badge-complete':'badge-ongoing'}" style="display:inline-block;margin:0 auto 8px;position:static;">${w.status==='complete'?'مكتملة':'مستمرة'}</span>
+                <h2>${w.flag} ${w.title}</h2>
+                <p style="text-align:center;color:var(--muted);font-size:0.85rem">✍️ ${w.author}</p>
+                <div class="modal-meta"><span>⭐${w.rating}</span><span>📖 ${w.chapters} فصل</span><span>📂 ${w.genre}</span><span>${w.label}</span></div>
+                <p class="modal-desc">${w.desc}</p>
+                <p style="background:rgba(124,58,237,0.1);padding:8px;border-radius:8px;font-size:0.78rem;color:var(--neon);text-align:center;margin-bottom:12px">✅ مترجمة للعربية</p>
+                <button class="modal-btn" onclick="closeModal()">📖 ابدأ القراءة الآن 💜</button>
+            `;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() { document.getElementById('modal').classList.remove('active'); document.body.style.overflow = ''; }
+        document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+        // صفحات
+        function showWriterPage() { document.getElementById('mainPage').style.display='none'; document.getElementById('writerPage').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+        function showMainPage() { document.getElementById('writerPage').style.display='none'; document.getElementById('mainPage').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+
+        let userWorks = [];
+        function addWork() {
+            const name = document.getElementById('wName').value.trim();
+            const type = document.getElementById('wType').value;
+            const genre = document.getElementById('wGenre').value;
+            const title = document.getElementById('wTitle').value.trim();
+            const image = document.getElementById('wImage').value.trim();
+            const chapters = document.getElementById('wChapters').value.trim();
+            const status = document.getElementById('wStatus').value;
+            const desc = document.getElementById('wDesc').value.trim();
+            if (!name || !title || !desc) { alert('املأ الحقول المطلوبة'); return; }
+            const w = { id:'u_'+Date.now(), title, author:name, type:type.includes('مانهاوا')?'manhwa':type.includes('مانهوا')?'manhua':type.includes('مانغا')?'manga':'novel', flag:'👤', label:type, image:image||'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400', chapters:parseInt(chapters)||0, status, rating:'5.0', genre, desc };
+            userWorks.unshift(w);
+            allWorks.unshift(w);
+            document.getElementById('successMsg').style.display='block';
+            setTimeout(()=>document.getElementById('successMsg').style.display='none',3000);
+            ['wName','wTitle','wImage','wChapters','wDesc'].forEach(id=>document.getElementById(id).value='');
+            renderUserWorks();
+            renderWorks();
+            renderTrending();
+        }
+        function renderUserWorks() {
+            const grid = document.getElementById('userWorksGrid');
+            grid.innerHTML = userWorks.map(w => `
+                <div class="book-card" onclick="openModal('${w.id}')">
+                    <div class="book-cover"><img src="${w.image}" alt="${w.title}" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#4C1D95,#7C3AED)';"><span class="book-badge badge-popular">${w.status==='complete'?'مكتمل':'مستمر'}</span></div>
+                    <div class="book-info"><div class="book-title">👤 ${w.title}</div><div class="book-meta">⭐${w.rating} · ${w.chapters} فصل</div><div class="book-meta">${w.genre} · ${w.label}</div></div>
+                </div>
+            `).join('');
+        }
+
+        // سكرول
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTop');
+            if (window.scrollY > 500) btn.classList.add('visible'); else btn.classList.remove('visible');
+        });
+        document.getElementById('scrollTop').addEventListener('click', () => { window.scrollTo({top:0,behavior:'smooth'}); });
+
+        // بدء
+        renderWorks();
+        renderTrending();
+    </script>
+</body>
+</html>            align-items: center;
             justify-content: center;
             z-index: 9999;
             transition: opacity 0.5s, visibility 0.5s;
